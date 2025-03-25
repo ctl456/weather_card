@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Weather Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #121212;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            text-align: center;
+            color: #f5f5f7;
+        }
+
+        .weather-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .weather-card {
+            width: 250px;
+            height: 350px;
+            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .weather-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        /* Wind Card */
+        .wind-card .cloud {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: moveCloud linear infinite;
+        }
+
+        .wind-card .cloud1 {
+            width: 60px;
+            height: 30px;
+            top: 30%;
+            left: 10%;
+            animation-duration: 20s;
+        }
+
+        .wind-card .cloud2 {
+            width: 80px;
+            height: 40px;
+            top: 20%;
+            left: 30%;
+            animation-duration: 25s;
+        }
+
+        .wind-card .cloud3 {
+            width: 50px;
+            height: 25px;
+            top: 25%;
+            left: 60%;
+            animation-duration: 18s;
+        }
+
+        .wind-card .tree {
+            position: absolute;
+            bottom: 20px;
+            width: 20px;
+            background-color: #5e3a1f;
+            border-radius: 5px;
+        }
+
+        .wind-card .tree1 {
+            height: 80px;
+            left: 30px;
+            animation: swayTree1 3s ease-in-out infinite;
+        }
+
+        .wind-card .tree2 {
+            height: 60px;
+            left: 70px;
+            animation: swayTree2 2.5s ease-in-out infinite;
+        }
+
+        .wind-card .tree3 {
+            height: 100px;
+            right: 50px;
+            animation: swayTree3 3.5s ease-in-out infinite;
+        }
+
+        .wind-card .tree-top {
+            position: absolute;
+            background-color: #2e8b57;
+            border-radius: 50%;
+            bottom: 100%;
+            transform: translateX(-50%);
+        }
+
+        .wind-card .tree-top1 {
+            width: 50px;
+            height: 60px;
+            left: 50%;
+        }
+
+        .wind-card .tree-top2 {
+            width: 40px;
+            height: 50px;
+            left: 50%;
+        }
+
+        .wind-card .tree-top3 {
+            width: 60px;
+            height: 70px;
+            left: 50%;
+        }
+
+        @keyframes moveCloud {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(300px); }
+        }
+
+        @keyframes swayTree1 {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @keyframes swayTree2 {
+            0%, 100% { transform: rotate(4deg); }
+            50% { transform: rotate(-4deg); }
+        }
+
+        @keyframes swayTree3 {
+            0%, 100% { transform: rotate(-6deg); }
+            50% { transform: rotate(6deg); }
+        }
+
+        /* Rain Card */
+        .rain-card {
+            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+        }
+
+        .rain-card .raindrop {
+            position: absolute;
+            background-color: rgba(100, 180, 255, 0.7);
+            width: 2px;
+            height: 15px;
+            border-radius: 0 0 5px 5px;
+            animation: fallingRain linear infinite;
+        }
+
+        .rain-card .puddle {
+            position: absolute;
+            bottom: 20px;
+            background-color: rgba(100, 180, 255, 0.3);
+            border-radius: 50%;
+            animation: puddleGrow 3s ease-in-out infinite;
+        }
+
+        .rain-card .puddle1 {
+            width: 30px;
+            height: 10px;
+            left: 40px;
+            animation-delay: 0.5s;
+        }
+
+        .rain-card .puddle2 {
+            width: 40px;
+            height: 12px;
+            right: 50px;
+            animation-delay: 1s;
+        }
+
+        .rain-card .puddle3 {
+            width: 25px;
+            height: 8px;
+            left: 100px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes fallingRain {
+            0% { transform: translateY(-50px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(300px); opacity: 0; }
+        }
+
+        @keyframes puddleGrow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Sun Card */
+        .sun-card {
+            background: linear-gradient(135deg, #3a3a3a, #4a4a4a);
+        }
+
+        .sun-card .sun {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffde59, #ff9d00);
+            border-radius: 50%;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 50px #ff9d00;
+        }
+
+        .sun-card .sun-ray {
+            position: absolute;
+            background: linear-gradient(to right, rgba(255, 222, 89, 0.7), rgba(255, 157, 0, 0));
+            height: 3px;
+            border-radius: 3px;
+            top: 50%;
+            left: 50%;
+            transform-origin: left center;
+            animation: pulseRay 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseRay {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Snow Card */
+        .snow-card .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            animation: fallingSnow linear infinite;
+            opacity: 0.8;
+        }
+
+        .snow-card .snow-accumulation {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 0 0 15px 15px;
+            animation: snowAccumulate 5s ease-in-out infinite;
+        }
+
+        @keyframes fallingSnow {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes snowAccumulate {
+            0%, 100% { height: 20px; }
+            50% { height: 30px; }
+        }
+
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .control-btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .control-btn:hover {
+            background-color: #555;
+        }
+
+        .control-btn.active {
+            background-color: #0071e3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Animated Weather Cards</h1>
+    
+    <div class="weather-container">
+        <div class="weather-card wind-card">
+            <div class="weather-title">Wind</div>
+            <div class="cloud cloud1"></div>
+            <div class="cloud cloud2"></div>
+            <div class="cloud cloud3"></div>
+            <div class="tree tree1">
+                <div class="tree-top tree-top1"></div>
+            </div>
+            <div class="tree tree2">
+                <div class="tree-top tree-top2"></div>
+            </div>
+            <div class="tree tree3">
+                <div class="tree-top tree-top3"></div>
+            </div>
+        </div>
+        
+        <div class="weather-card rain-card">
+            <div class="weather-title">Rain</div>
+        </div>
+        
+        <div class="weather-card sun-card">
+            <div class="weather-title">Sun</div>
+            <div class="sun"></div>
+        </div>
+        
+        <div class="weather-card snow-card">
+            <div class="weather-title">Snow</div>
+            <div class="snow-accumulation"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="control-btn active" onclick="toggleAnimation('all')">All Animations</button>
+        <button class="control-btn" onclick="toggleAnimation('wind')">Wind Only</button>
+        <button class="control-btn" onclick="toggleAnimation('rain')">Rain Only</button>
+        <button class="control-btn" onclick="toggleAnimation('sun')">Sun Only</button>
+        <button class="control-btn" onclick="toggleAnimation('snow')">Snow Only</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create raindrops
+            const rainCard = document.querySelector('.rain-card');
+            for (let i = 0; i < 50; i++) {
+                const raindrop = document.createElement('div');
+                raindrop.className = 'raindrop';
+                raindrop.style.left = `${Math.random() * 100}%`;
+                raindrop.style.animationDuration = `${0.5 + Math.random() * 1.5}s`;
+                raindrop.style.animationDelay = `${Math.random() * 2}s`;
+                rainCard.appendChild(raindrop);
+            }
+
+            // Create sun rays
+            const sunCard = document.querySelector('.sun-card');
+            for (let i = 0; i < 12; i++) {
+                const ray = document.createElement('div');
+                ray.className = 'sun-ray';
+                ray.style.width = `${60 + Math.random() * 40}px`;
+                ray.style.transform = `translate(-50%, -50%) rotate(${i * 30}deg)`;
+                ray.style.animationDelay = `${Math.random() * 2}s`;
+                sunCard.appendChild(ray);
+            }
+
+            // Create snowflakes
+            const snowCard = document.querySelector('.snow-card');
+            for (let i = 0; i < 30; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = `${Math.random() * 100}%`;
+                snowflake.style.animationDuration = `${3 + Math.random() * 7}s`;
+                snowflake.style.animationDelay = `${Math.random() * 5}s`;
+                snowCard.appendChild(snowflake);
+            }
+
+            // Set initial state (all animations running)
+            toggleAnimation('all');
+        });
+
+        function toggleAnimation(type) {
+            const cards = document.querySelectorAll('.weather-card');
+            const buttons = document.querySelectorAll('.control-btn');
+            
+            // Update button states
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if ((type === 'all' && btn.textContent === 'All Animations') ||
+                    (type === 'wind' && btn.textContent === 'Wind Only') ||
+                    (type === 'rain' && btn.textContent === 'Rain Only') ||
+                    (type === 'sun' && btn.textContent === 'Sun Only') ||
+                    (type === 'snow' && btn.textContent === 'Snow Only')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Toggle animations based on type
+            cards.forEach(card => {
+                const elements = card.querySelectorAll('*');
+                
+                if (type === 'all') {
+                    // Enable all animations
+                    elements.forEach(el => {
+                        el.style.animationPlayState = 'running';
+                    });
+                    card.style.opacity = '1';
+                } else if (card.classList.contains(`${type}-card`)) {
+                    // Enable animations for selected card
+                    elements.forEach(el => {
+                        el.style.animationPlayState = 'running';
+                    });
+                    card.style.opacity = '1';
+                } else {
+                    // Pause animations for other cards
+                    elements.forEach(el => {
+                        el.style.animationPlayState = 'paused';
+                    });
+                    card.style.opacity = '0.5';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
